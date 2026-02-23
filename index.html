@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="FINCOP TRADING – Custom printing, apparel branding, corporate merchandise and promotional products." />
+  <title>FINCOP TRADING</title>
+
+  <link rel="icon" href="images/fincop_logo.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --bg: #111;
+      --bg-soft: #1c1c1c;
+      --text: #f5f5f5;
+      --muted: #aaa;
+      --accent: #fff;
+      --border: #222;
+      --card: #1c1c1c;
+    }
+
+    body.light {
+      --bg: #f5f5f5;
+      --bg-soft: #ffffff;
+      --text: #111;
+      --muted: #555;
+      --accent: #000;
+      --border: #ddd;
+      --card: #fff;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      scroll-behavior: smooth;
+      transition: background .4s ease, color .4s ease;
+    }
+
+    header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 8%;
+      z-index: 1000;
+    }
+
+    .logo-img {
+      height: 56px;
+      transition: transform .4s ease, filter .4s ease;
+    }
+
+    @media(min-width: 1024px) {
+      .logo-img {
+        height: 72px;
+      }
+    }
+
+    .logo-img:hover {
+      transform: scale(1.08);
+      filter: drop-shadow(0 0 12px rgba(255,255,255,.5));
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 25px;
+      justify-content: flex-end; /* Align nav links to the right */
+      margin-left: auto;
+    }
+
+    nav a {
+      color: var(--muted);
+      text-decoration: none;
+      font-weight: 500;
+      position: relative;
+    }
+
+    nav a::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: -5px;
+      width: 0;
+      height: 2px;
+      background: var(--accent);
+      transition: .3s;
+    }
+
+    nav a:hover {
+      color: var(--accent);
+    }
+
+    nav a:hover::after {
+      width: 100%;
+    }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+    }
+
+    .hamburger span {
+      width: 25px;
+      height: 3px;
+      background: var(--accent);
+    }
+
+    @media(max-width:768px) {
+      nav ul {
+        position: fixed;
+        top: 70px;
+        right: 15px;
+        flex-direction: column;
+        background: var(--bg);
+        border-radius: 10px;
+        padding: 15px;
+        opacity: 0;
+        pointer-events: none;
+        transform: translateY(-20px);
+        transition: .3s;
+        text-align: right;
+      }
+
+      nav ul.active {
+        opacity: 1;
+        pointer-events: auto;
+        transform: translateY(0);
+      }
+
+      .hamburger {
+        display: flex;
+      }
+    }
+
+    section {
+      padding: 90px 8%;
+      opacity: 0;
+      transform: translateY(40px);
+      transition: .7s ease;
+    }
+
+    section.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .hero {
+      text-align: center;
+      padding-top: 140px;
+    }
+
+    .hero h2 {
+      font-size: clamp(32px, 4vw, 48px);
+      margin-bottom: 20px;
+    }
+
+    p {
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .btn {
+      display: inline-block;
+      margin-top: 25px;
+      padding: 12px 28px;
+      background: var(--accent);
+      color: var(--bg);
+      border-radius: 5px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: .3s;
+    }
+
+    .btn:hover {
+      transform: translateY(-4px);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px,1fr));
+      gap: 25px;
+      margin-top: 40px;
+    }
+
+    .card {
+      background: var(--card);
+      padding: 25px;
+      border-radius: 10px;
+      transition: .3s;
+      text-align: center;
+    }
+
+    .card:hover {
+      transform: translateY(-8px);
+    }
+
+    .card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-bottom: 15px;
+    }
+
+    footer {
+      background: var(--bg-soft);
+      padding: 40px 8%;
+      text-align: left;
+      margin-top: 80px;
+    }
+
+    footer a {
+      color: var(--muted);
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      color: var(--accent);
+      text-decoration: underline;
+    }
+
+    #toTop {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: var(--accent);
+      color: var(--bg);
+      padding: 12px 14px;
+      border-radius: 50%;
+      cursor: pointer;
+      opacity: 0;
+      pointer-events: none;
+      transition: .4s;
+      font-weight: bold;
+      z-index: 2000;
+    }
+
+    #toTop.show {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    #themeToggle {
+      position: fixed;
+      bottom: 20px;
+      right: 70px; /* Slightly left of toTop */
+      background: var(--accent);
+      color: var(--bg);
+      padding: 12px 14px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 18px;
+      transition: background .4s, color .4s, transform .3s;
+      z-index: 2000;
+    }
+
+    #themeToggle:hover {
+      transform: translateY(-3px);
+    }
+
+    #contact-form-container {
+      display: none;
+      max-width: 600px;
+      margin: 60px auto;
+      padding: 30px;
+      background: var(--bg-soft);
+      border-radius: 10px;
+      position: relative;
+    }
+
+    input,
+    textarea {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 15px;
+      border-radius: 6px;
+      background: var(--bg);
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+
+    button {
+      padding: 12px 25px;
+      border: none;
+      background: var(--accent);
+      color: var(--bg);
+      font-weight: 600;
+      cursor: pointer;
+      transition: .3s;
+    }
+
+    button:hover {
+      transform: translateY(-3px);
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <a href="#top">
+    <img src="images/fincop_logo.png" alt="FINCOP Logo" class="logo-img">
+  </a>
+
+  <nav>
+    <ul class="nav-links">
+      <li><a href="#products">Products</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#" class="request-quote-link">Request Quote</a></li>
+    </ul>
+  </nav>
+
+  <div class="hamburger">
+    <span></span><span></span><span></span>
+  </div>
+</header>
+
+<section class="hero show">
+  <h2>Custom Printing Made Easy</h2>
+  <p>High-quality custom apparel, corporate branding, and promotional merchandise delivered with speed and precision.</p>
+  <a href="#" class="btn request-quote-link">Request a Quote</a>
+</section>
+
+<section id="products">
+  <h2>Our Products</h2>
+  <div class="grid">
+    <div class="card"><img src="images/shirt.png"><h3>T-Shirts</h3></div>
+    <div class="card"><img src="images/mugs.png"><h3>Mugs</h3></div>
+    <div class="card"><img src="images/cap.png"><h3>Caps</h3></div>
+    <div class="card"><img src="images/studentc.png"><h3>Business Cards</h3></div>
+  </div>
+</section>
+
+<section id="services">
+  <h2>Our Services</h2>
+  <div class="grid">
+    <div class="card"><h3>Corporate Branding</h3></div>
+    <div class="card"><h3>Event Merchandise</h3></div>
+    <div class="card"><h3>Design Assistance</h3></div>
+  </div>
+</section>
+
+<section id="about">
+  <h2>About FINCOP</h2>
+  <p style="max-width:720px;margin-top:15px;">Modern print-on-demand company focused on quality, affordability and fast turnaround.</p>
+</section>
+
+<div id="contact-form-container">
+  <h2>Request a Quote</h2>
+  <form action="https://formspree.io/f/maqdlokj" method="POST">
+    <input type="text" name="_gotcha" style="display:none">
+    <input type="text" name="name" placeholder="Your Name" required>
+    <input type="email" name="email" placeholder="Your Email" required>
+    <textarea name="message" rows="5" placeholder="Tell us what you need printed..." required></textarea>
+    <button type="submit">Send Message</button>
+  </form>
+</div>
+
+<footer>
+  📧 <a href="mailto:kgabekp@gmail.com">kgabekp@gmail.com</a><br>
+  📧 <a href="mailto:pjpatrician@gmail.com">pjpatrician@gmail.com</a><br><br>
+  📞 <a href="tel:0826709108">082 670 9108</a><br>
+  📞 <a href="tel:0672880105">067 288 0105</a>
+</footer>
+
+<div id="themeToggle">🌓</div>
+<div id="toTop">↑</div>
+
+<script>
+  const hamburger = document.querySelector('.hamburger');
+  const navLinks = document.querySelector('.nav-links');
+  const toggle = document.getElementById('themeToggle');
+  const toTop = document.getElementById('toTop');
+
+  hamburger.onclick = () => navLinks.classList.toggle('active');
+
+  toggle.onclick = () => {
+    document.body.classList.toggle('light');
+
+    // Invert toggle button colors automatically
+    if(document.body.classList.contains('light')) {
+      toggle.style.background = 'var(--accent)';
+      toggle.style.color = 'var(--bg)';
+    } else {
+      toggle.style.background = 'var(--accent)';
+      toggle.style.color = 'var(--bg)';
+    }
+
+    localStorage.setItem('theme', document.body.classList.contains('light') ? 'light' : 'dark');
+  };
+
+  // Initialize theme on load
+  if (localStorage.getItem('theme') === 'light') {
+    document.body.classList.add('light');
+    toggle.style.background = 'var(--accent)';
+    toggle.style.color = 'var(--bg)';
+  }
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => entry.isIntersecting && entry.target.classList.add('show'));
+  }, { threshold: 0.15 });
+
+  document.querySelectorAll('section').forEach(sec => observer.observe(sec));
+
+  window.addEventListener('scroll', () => {
+    toTop.classList.toggle('show', window.scrollY > 400);
+  });
+
+  toTop.onclick = () => window.scrollTo({ top: 0, behavior: 'smooth' });
+</script>
+
+</body>
+</html>
